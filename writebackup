@@ -1,0 +1,102 @@
+// import { NextResponse, NextRequest  } from "next/server"
+// import { Workbook } from 'exceljs';
+// import fs from 'fs';
+
+// export const dynamic = 'force-dynamic';
+
+// export async function POST(req: NextRequest, res: NextResponse) {
+
+//     try {
+//         if (req.method !== "POST") {
+//             return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
+//         }
+//         else {
+//             const { revenue, expense }: calcValues = await req.json();
+//             if (!revenue || !expense) {
+//                 return NextResponse.json({ error: "Missing revenue or expense" }, { status: 400 });
+//             }
+
+//             const filePath = './data.xlsx';
+//             const workbook = new Workbook();
+//             if (fs.existsSync(filePath)) {
+//             await workbook.xlsx.readFile(filePath);
+//             }
+//             let worksheet = workbook.getWorksheet("Sheet1");
+//             if (!worksheet) {
+//             worksheet = workbook.addWorksheet("Sheet1");
+//             }
+
+//             // Write to specific cells
+//             worksheet.getCell("A1").value = revenue;
+//             worksheet.getCell("A2").value = expense;
+//             await workbook.xlsx.writeFile(filePath);
+
+//             //get the cell values we just wrote
+//             const revenueCell = worksheet.getCell("A1").value;
+//             const expensesCell = worksheet.getCell("A2").value;
+//             const profitCell = worksheet.getCell("A4").result;
+
+            
+//             // const cellValueObj3 = worksheet.getCell("A4").result;
+
+//             // async function writeCellandGetProfit(){
+//             //     const cellValueObj1 = worksheet.getCell("A1");
+//             //     const cellValueObj2 = worksheet.getCell("B1");
+//             //     const cellValueObj3 = worksheet.getCell("A4");
+//             //     cellValueObj1.value = revenue;
+//             //     cellValueObj2.value = expense;
+//             //     cellValueObj3.value = `=A1-B1`;
+//             //     await workbook.xlsx.writeFile(filePath);
+//             //     return cellValueObj3.result;
+//             // }
+
+//             return NextResponse.json(
+//             { 
+//                 message: `POST Request for Revenue ${revenueCell} and expense ${expensesCell} added to excel file successfully
+//                 Profit is ${profitCell}`,
+//                 Profit: profitCell,
+//                 Revenue: revenueCell,
+//                 Expenses: expensesCell 
+//             }, 
+//             { status: 200 }
+//             );
+//         }
+
+//     } catch (err) {
+//         console.log(err);
+//     }
+// }
+
+// //get the cell values we just wrote and send them back to the client
+// // export async function GET(req: NextRequest, res: NextResponse) {
+// //     try {
+// //         if (req.method !== "GET") {
+// //             return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
+// //         } else {
+
+// //             const filePath = './data.xlsx';
+// //             const workbook = new Workbook();
+// //             await workbook.xlsx.readFile(filePath);
+
+// //             const worksheet = workbook.getWorksheet("Sheet1");
+
+// //             // Read from specific cell
+
+// //             const cellValueObj3 = worksheet.getCell("A4").result;
+
+
+// //             return NextResponse.json(
+// //                 { 
+// //                     Profit: cellValueObj3, 
+// //                 }, 
+// //                 { status: 200 }
+// //             );
+// //         }
+// //     } catch (err) {
+// //         console.log(err);
+// //         return NextResponse.json({ error: "An error occurred." }, { status: 500 });
+// //     }
+
+// // }
+
+
